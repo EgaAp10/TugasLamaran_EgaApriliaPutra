@@ -16,7 +16,7 @@ export default function App() {
             <AddUser />
           </Route>
           <Route path="/edit-user">
-            <EditUser />
+            <EditUser /> 
           </Route>
           <Route path="/">
             <UserList />
