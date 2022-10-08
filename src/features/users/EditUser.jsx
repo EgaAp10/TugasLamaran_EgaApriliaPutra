@@ -22,10 +22,8 @@ export function EditUser() {
     state.users.entities.find((user) => user.id === userId)
   );
 
-   const [namasupplier, setNamasupplier] = useState(user.namasupplier);
-  const [nohp, setNohp] = useState(user.nohp);
-  const [alamat, setAlamat] = useState(user.alamat);
-  const [error, setError] = useState(null);
+   const [nama, setNama] = useState(user.nama);
+
   const [kabupaten, setKabupaten] = useState([]);
   const [valKabupaten, setValKabupaten] = useState([]);
   const [kecamatan, setKecamatan] = useState([]);
@@ -37,11 +35,8 @@ export function EditUser() {
     loading: false,
     provinsi: null,
   });
-  const handleNamasupplier = (e) => {
-    setNamasupplier(e.target.value)
-  } ;
-  const handleNohp = (e) => setNohp(e.target.value);
-  const handleAlamat = (e) => setAlamat(e.target.value);
+  const handleNama = (e) => {
+    setNama(e.target.value) } ;
 useEffect(() => {
     setAppState({ loading: true });
     const user = `https://dev.farizdotid.com/api/daerahindonesia/provinsi`;
@@ -68,9 +63,7 @@ useEffect(() => {
        const dataapi =
        {
       "id":userId,
-      "namasupplier": namasupplier,
-    "nohp": nohp,
-    "alamat":alamat,
+      "nama": nama,
     "kec": user.kec,
     "kabkot": user.kabkot,
       "prov": user.prov
@@ -83,21 +76,19 @@ useEffect(() => {
       );
 
 
-      setError(null);
+      
       history.push("/");
    
 
-    setAlamat("");
-    setNamasupplier("");
-    setNohp("");
+    
+    setNama("");
+   
     } else {
        const dataapi =
        {
       "id":userId,
       
-      "namasupplier": namasupplier,
-    "nohp": nohp,
-    "alamat":alamat,
+      "nama": nama,
     "kec": valkecamatan,
     "kabkot": valKabupaten,
       "prov": valprovinsi
@@ -106,13 +97,11 @@ useEffect(() => {
         updateUsers(dataapi)
       );
 
-setError(null);
-      history.push("/");
-     
 
-    setAlamat("");
-    setNamasupplier("");
-    setNohp("");
+      history.push("/");
+    
+    setNama("");
+
     }
     
   };
@@ -152,12 +141,8 @@ setError(null);
       </Button>
           </Link>
       
-      <FormHelperText>Nama</FormHelperText><TextField id="outlined-basic" variant="outlined" style={{ width:'100%', marginTop: 10 }} onChange={handleNamasupplier}  value={namasupplier}/>
+      <FormHelperText>Nama</FormHelperText><TextField id="outlined-basic" variant="outlined" style={{ width:'100%', marginTop: 10 }} onChange={handleNama}  value={nama}/>
       <br></br>
-      <FormHelperText>No HP</FormHelperText><TextField id="outlined-basic" variant="outlined" style={{ width: '100%', marginTop: 10 }} onChange={handleNohp} value={nohp} />
-      <br></br>
-      <FormHelperText>Alamat</FormHelperText>
-       <TextField id="outlined-basic" variant="outlined" style={{ width:'100%',marginTop:10  }} onChange={handleAlamat} value={alamat}/>
       <FormHelperText>Provinsi</FormHelperText> 
       <Autocomplete
           id="combo-box-demo"

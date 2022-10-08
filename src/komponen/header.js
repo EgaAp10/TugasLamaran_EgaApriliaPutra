@@ -36,7 +36,7 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Asisst.id
+            Daftar Pegawai
           </Typography>
           <Link
             to="/add-user"
@@ -52,7 +52,7 @@ export default function Header() {
                 textDecoration: "none",
               }}
             >
-              Tambah Supplier
+              Tambah Pegawai
             </Button>
           </Link>
         </Toolbar>

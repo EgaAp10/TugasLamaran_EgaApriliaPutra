@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { useHistory } from "react-router-dom";
 import { useState,useEffect } from "react";
@@ -17,20 +17,18 @@ import SaveIcon from '@material-ui/icons/Save';
 export function AddUser() {
   const dispatch = useDispatch();
   const history = useHistory();
+  
 
-  const [namasupplier, setNamasupplier] = useState("");
-  const [nohp, setNohp] = useState("");
-  const [alamat, setAlamat] = useState("");
-  const [error, setError] = useState(null);
+  const [nama, setNama] = useState("");
+  
   const [kabupaten, setKabupaten] = useState([]);
   const [valKabupaten, setValKabupaten] = useState([]);
   const [kecamatan, setKecamatan] = useState([]);
   const [valkecamatan, setValKecamatan] = useState([]);
   const [valprovinsi, setValProvinsi] = useState([]);
 
-  const handleNamasupplier = (e) => setNamasupplier(e.target.value);
-  const handleNohp = (e) => setNohp(e.target.value);
-  const handleAlamat = (e) => setAlamat(e.target.value);
+  const handleNama = (e) => setNama(e.target.value);
+  
   const [appState, setAppState] = useState({
     loading: false,
     provinsi: null,
@@ -50,29 +48,26 @@ export function AddUser() {
   const handleClick = () => {
     const dataapi =
     {
-      "namasupplier": namasupplier,
-    "nohp": nohp,
-    "alamat":alamat,
+      "nama": nama,
     "kec": valkecamatan,
     "kabkot": valKabupaten,
       "prov": valprovinsi
     }
     console.log(dataapi)
-    if (namasupplier && nohp && alamat && valprovinsi && valkecamatan && valKabupaten) {
+    if (nama && valprovinsi && valkecamatan && valKabupaten) {
       dispatch(
         addUsers(dataapi)
       );
 
 
-      setError(null);
+      
       history.push("/");
     } else {
-      setError("Fill in all fields");
+      
     }
 
-    setAlamat("");
-    setNamasupplier("");
-    setNohp("");
+    setNama("");
+    
   };
  
   const handleChangeKabupaten = (event, val) => {
@@ -118,10 +113,7 @@ export function AddUser() {
         Cancel
       </Button>
           </Link>
-      <TextField id="outlined-basic" label="Nama Supplier" variant="outlined" style={{ width:'100%', marginTop: 20 }} onChange={handleNamasupplier} />
-      <br></br><TextField id="outlined-basic" label="No HP" variant="outlined" style={{ width:'100%', marginTop: 10 }} onChange={handleNohp} />
-      <br></br>
-       <TextField id="outlined-basic" label="Alamat" variant="outlined" style={{ width:'100%',marginTop:10  }} onChange={handleAlamat}/>
+      <TextField id="outlined-basic" label="Nama " variant="outlined" style={{ width:'100%', marginTop: 20 }} onChange={handleNama} />
      <Autocomplete
           id="combo-box-demo"
           onChange={handleChangeProvinsi}

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
-  const response = await fetch("https://reqaid.com/api/FakePosts");
+  const response = await fetch("https://61601920faa03600179fb8d2.mockapi.io/pegawai");
   const users = await response.json();
   return users.slice(11, users.length);
 });
@@ -15,7 +15,7 @@ export const updateUsers = createAsyncThunk(
     };
 
     const response = await fetch(
-      "https://reqaid.com/api/FakePosts/" + data.id,
+      "https://61601920faa03600179fb8d2.mockapi.io/pegawai/%7Bid%7D" + data.id,
       requestOptions
     );
     const users = await response.json();
@@ -30,7 +30,7 @@ export const addUsers = createAsyncThunk("users/addUsers", async (data) => {
     body: JSON.stringify(data),
   };
   const response = await fetch(
-    "https://reqaid.com/api/FakePosts",
+    "https://61601920faa03600179fb8d2.mockapi.io/pegawai",
     requestOptions
   );
   const users = await response.json();
@@ -48,16 +48,16 @@ const usersSlice = createSlice({
       state.entities.push(action.payload);
     },
     userUpdated(state, action) {
-      const { id, name, email } = action.payload;
+      const { id, nama } = action.payload;
       const existingUser = state.entities.find((user) => user.id === id);
       if (existingUser) {
-        existingUser.name = name;
-        existingUser.email = email;
+        existingUser.nama = nama;
+        
       }
     },
     userDeleted(state, action) {
       const { id } = action.payload;
-      fetch("https://reqaid.com/api/FakePosts/" + id, {
+      fetch("https://61601920faa03600179fb8d2.mockapi.io/pegawai/%7Bid%7D" + id, {
         method: "DELETE",
       }).then(() => console.log("Berhasil"));
       state.entities = state.entities.filter((user) => user.id !== id);
